@@ -1,366 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolFusion AI - By Accessible Resource</title>
-    <style>
-        /* Base Styles with Tri-Color Scheme */
-        :root {
-            --primary: #0F172A;
-            --secondary: #1E293B;
-            --accent-1: #7C3AED;
-            --accent-2: #0EA5E9;
-            --accent-3: #10B981;
-            --text: #F8FAFC;
-            --bg: #020617;
-            --card-bg: #1E293B;
-            --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool Fusion AI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background-color 0.5s, color 0.5s;
+      background-color: #121212;
+      color: #f0f0f0;
+    }
 
-        [data-theme="light"] {
-            --primary: #F1F5F9;
-            --secondary: #E2E8F0;
-            --accent-1: #6366F1;
-            --accent-2: #3B82F6;
-            --accent-3: #10B981;
-            --text: #0F172A;
-            --bg: #FFFFFF;
-            --card-bg: #F8FAFC;
-            --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
-        }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-            scroll-behavior: smooth;
-        }
+    .welcome {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 183, 255, 0.3);
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease;
+    }
 
-        /* Particle Background Effect */
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 50%, 
-                rgba(124, 58, 237, 0.1) 0%, 
-                rgba(14, 165, 233, 0.05) 30%, 
-                rgba(16, 185, 129, 0.02) 60%, 
-                transparent 100%);
-        }
+    .toggle-btn {
+      background: #333;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      cursor: pointer;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
 
-        /* Header with Animated Gradient */
-        header {
-            background: linear-gradient(
-                135deg,
-                var(--primary) 0%,
-                var(--secondary) 100%
-            );
-            padding: 4rem 1rem;
-            position: relative;
-            overflow: hidden;
-            transform: skewY(-1deg);
-            margin-bottom: 3rem;
-        }
+    .toggle-btn:hover {
+      background: #0072ff;
+    }
 
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: var(--gradient);
-            opacity: 0.1;
-            animation: gradientFlow 20s linear infinite;
-        }
+    #search {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      outline: none;
+      background: #1e1e1e;
+      color: white;
+    }
 
-        /* Welcome Message Animation */
-        .welcome-message {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            animation: textFloat 6s ease-in-out infinite;
-        }
+    .tool-list {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
 
-        .welcome-message h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-        }
+    .tool-item {
+      padding: 15px;
+      margin-bottom: 10px;
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
 
-        /* Enhanced Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--gradient);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+    .tool-item:hover {
+      background: #2a2a2a;
+      transform: scale(1.02);
+    }
 
-        .theme-toggle:hover {
-            transform: rotate(180deg) scale(1.1);
-        }
+    .light-mode {
+      background-color: #f3f3f3;
+      color: #222;
+    }
 
-        /* Premium Search Bar */
-        .search-container {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-            position: relative;
-        }
+    .light-mode .welcome {
+      background: #fff;
+      color: #222;
+    }
 
-        #search {
-            width: 100%;
-            padding: 1.25rem 2rem;
-            border: 2px solid var(--accent-3);
-            border-radius: 50px;
-            background: var(--card-bg);
-            color: var(--text);
-            font-size: 1.1rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
+    .light-mode #search {
+      background: #e0e0e0;
+      color: #000;
+    }
 
-        #search:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px var(--accent-2),
-                        0 10px 30px rgba(14, 165, 233, 0.2);
-            border-color: var(--accent-2);
-        }
+    .light-mode .tool-item {
+      background: #ffffff;
+      color: #000;
+    }
 
-        /* Tri-Color Tool Cards */
-        .tools-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-        }
+    .light-mode .tool-item:hover {
+      background: #dcdcdc;
+    }
 
-        .tool-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: var(--gradient);
-            opacity: 0.1;
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .tool-card:hover::before {
-            transform: rotate(45deg) translateY(50%);
-        }
-
-        .tool-link {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            position: relative;
-            z-index: 1;
-            display: block;
-            transition: color 0.3s ease;
-        }
-
-        /* Scroll Animations */
-        @media (prefers-reduced-motion: no-preference) {
-            .tool-card {
-                opacity: 0;
-                transform: translateY(20px);
-                transition: all 0.6s ease;
-            }
-            
-            .tool-card.in-view {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Keyframe Animations */
-        @keyframes gradientFlow {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(50%); }
-        }
-
-        @keyframes textFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes cardShine {
-            0% { background-position: -100% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 3rem 1rem;
-            }
-            
-            .welcome-message h1 {
-                font-size: 2rem;
-            }
-            
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
 </head>
 <body>
-    <div class="particles"></div>
-    <button class="theme-toggle" aria-label="Toggle theme mode">🌓</button>
-    
-    <header>
-        <div class="welcome-message">
-            <h1>Welcome to ToolFusion AI</h1>
-            <p>By S M Ripon & Accessible Resource Team</p>
-            <p>Thank you for choosing our platform! More powerful AI tools coming soon.</p>
-            <p>We value your feedback - please share your experience with us!</p>
-        </div>
-    </header>
+  <div class="container">
+    <h1>Tool Fusion AI</h1>
 
-    <main>
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search AI tools..." aria-label="Search AI tools">
-        </div>
+    <div class="welcome">
+      <p>Welcome to Tool Fusion AI, a premium hub crafted by the team at Accessible Resource. We’ve gathered the most useful and smart AI tools in one place to help you be more productive, creative, and efficient.</p>
+      <p>Each tool here is designed to support your everyday tasks and creative needs. Explore the collection below and discover how AI can make your digital journey smoother.</p>
+      <p>If you find our platform helpful, support us to continue expanding with even more powerful AI tools and updates in the future. We are the developers and creators behind this project and committed to providing the best user experience.</p>
+    </div>
 
-        <ul class="tools-grid" role="list">
-            <!-- Tools will be dynamically inserted here -->
-        </ul>
-    </main>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
 
-    <script>
-        // Existing JavaScript functionality remains unchanged
-        const themeToggle = document.querySelector('.theme-toggle');
-        const body = document.body;
+    <input type="text" id="search" placeholder="Search tools..." onkeyup="searchTools()"/>
 
-        // Theme Toggle
-        themeToggle.addEventListener('click', () => {
-            body.setAttribute('data-theme',
-                body.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
-            );
-            localStorage.setItem('theme', body.getAttribute('data-theme'));
-        });
+    <div class="tool-list" id="toolList">
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Heart-wish/')">HeartWish Premium</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/VocabHub/')">VocabHub</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Accessible-resource-chat/')">Accessible Resource AI Chatbot</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/LinguaFlow-Translate/')">LinguaFlow Translate</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/RiddleMaster-Elite/')">RiddleMaster Elite</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Smart-Post-Studio/')">Smart Post Studio</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Eternal-Love-Weaver-/')">Eternal Love Weaver</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Grammar-checker/')">Smart AI Grammar Checker</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-poem-writer/')">Smart AI Poem Writer</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SmartPDF-Analyzer---/')">SmartPDF Analyzer</div>
+    </div>
+  </div>
 
-        // Set saved theme
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        body.setAttribute('data-theme', savedTheme);
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
 
-        // Tools Data
-        const tools = [
-            { name: 'Accessible Resource AI Chatbot', url: 'https://accessibleresource.github.io/Accessible-resource-chat/' },
-            { name: 'LinguaFlow Translate', url: 'https://accessibleresource.github.io/LinguaFlow-Translate/' },
-            { name: 'Smart Post Studio', url: 'https://accessibleresource.github.io/Smart-Post-Studio/' },
-            { name: 'SmartPDF Analyzer', url: 'https://accessibleresource.github.io/SmartPDF-Analyzer---/' },
-            { name: 'Smart AI Poem Writer', url: 'https://accessibleresource.github.io/Ai-poem-writer/' },
-            { name: 'Smart AI Grammar Checker', url: 'https://accessibleresource.github.io/Grammar-checker/' },
-            { name: 'Eternal Love Weaver', url: 'https://accessibleresource.github.io/Eternal-Love-Weaver-/' }
-        ];
+    function searchTools() {
+      const input = document.getElementById('search').value.toLowerCase();
+      const tools = document.querySelectorAll('.tool-item');
 
-        // Render Tools
-        const toolsGrid = document.querySelector('.tools-grid');
+      tools.forEach(tool => {
+        const title = tool.textContent.toLowerCase();
+        tool.style.display = title.includes(input) ? 'block' : 'none';
+      });
+    }
 
-        function renderTools(filteredTools = tools) {
-            toolsGrid.innerHTML = filteredTools.map(tool => `
-                <li class="tool-card" role="listitem">
-                    <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
-                        ${tool.name}
-                    </a>
-                </li>
-            `).join('');
-            
-            // Initialize scroll animations
-            initScrollAnimations();
-        }
-
-        // Search Functionality
-        document.getElementById('search').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filtered = tools.filter(tool => 
-                tool.name.toLowerCase().includes(searchTerm)
-            );
-            renderTools(filtered);
-        });
-
-        // Scroll Animations
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.tool-card').forEach(card => {
-                observer.observe(card);
-            });
-        }
-
-        // Initial Render
-        renderTools();
-
-        // Accessibility Features
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                document.body.classList.add('keyboard-nav');
-            }
-        });
-
-        // Performance Optimizations
-        window.addEventListener('load', () => {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js');
-            }
-        });
-    </script>
+    function openTool(url) {
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>
