@@ -118,10 +118,8 @@
   <div class="container">
     <h1>Tool Fusion AI</h1>
 
-    <div class="welcome">
-      <p>Welcome to Tool Fusion AI, a premium hub crafted by the team at Accessible Resource. We’ve gathered the most useful and smart AI tools in one place to help you be more productive, creative, and efficient.</p>
-      <p>Each tool here is designed to support your everyday tasks and creative needs. Explore the collection below and discover how AI can make your digital journey smoother.</p>
-      <p>If you find our platform helpful, support us to continue expanding with even more powerful AI tools and updates in the future. We are the developers and creators behind this project and committed to providing the best user experience.</p>
+    <div class="welcome" id="welcomeMessage">
+      <!-- Time-based greeting will be inserted here by JS -->
     </div>
 
     <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
@@ -139,6 +137,8 @@
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Grammar-checker/')">Smart AI Grammar Checker</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-poem-writer/')">Smart AI Poem Writer</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SmartPDF-Analyzer---/')">SmartPDF Analyzer</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-summarizer/')">AI Summarizer</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/AI-Text-Encryption-Decryption-Tool/')">AI Text Encryption & Decryption Tool</div>
     </div>
   </div>
 
@@ -153,13 +153,36 @@
 
       tools.forEach(tool => {
         const title = tool.textContent.toLowerCase();
-        tool.style.display = title.includes(input) ? 'block' : 'none';
+        tool.style.display = title.includes(input) ? 'block' : 'block';
       });
     }
 
     function openTool(url) {
       window.open(url, '_blank');
     }
+
+    function setWelcomeMessage() {
+      const hour = new Date().getHours();
+      let greeting = '';
+
+      if (hour >= 5 && hour < 12) {
+        greeting = 'Good Morning!';
+      } else if (hour >= 12 && hour < 17) {
+        greeting = 'Good Afternoon!';
+      } else {
+        greeting = 'Good Evening!';
+      }
+
+      const message = `
+        <p><strong>${greeting}</strong></p>
+        <p>Welcome to <strong>Tool Fusion AI</strong>, your all-in-one destination created by Accessible Resource. This platform brings together smart and helpful AI tools designed to boost your productivity, creativity, and daily tasks.</p>
+        <p>Browse the tools below or search to find exactly what you need. Your digital assistant is here, always ready to help!</p>
+      `;
+
+      document.getElementById('welcomeMessage').innerHTML = message;
+    }
+
+    setWelcomeMessage();
   </script>
 </body>
 </html>
