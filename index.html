@@ -112,10 +112,37 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
+
+    .top-banner {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #1d1d1d;
+      border-radius: 10px;
+    }
+
+    .top-banner p {
+      margin: 5px 0;
+    }
+
+    .top-banner a {
+      color: #00c6ff;
+      text-decoration: none;
+    }
+
+    .top-banner a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="top-banner">
+      <p><strong>Realizing Dreams Through the Touch of Technology</strong></p>
+      <p>📺 YouTube: <a href="https://youtube.com/@accessibleresource?si=LGhrnQDGHw-BTroD" target="_blank">Accessible Resource</a></p>
+      <p>💬 Telegram: <a href="https://t.me/shopnotamal" target="_blank">Join Us</a></p>
+    </div>
+
     <h1>Tool Fusion AI</h1>
 
     <div class="welcome" id="welcomeMessage">
@@ -127,6 +154,11 @@
     <input type="text" id="search" placeholder="Search tools..." onkeyup="searchTools()"/>
 
     <div class="tool-list" id="toolList">
+      <!-- Newly Added Tools First -->
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/photo-analyser.-/')">Photo Analyser</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Text-to-image-generator/')">Text to Image Generator</div>
+
+      <!-- Existing Tools -->
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Heart-wish/')">HeartWish Premium</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/VocabHub/')">VocabHub</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Accessible-resource-chat/')">Accessible Resource AI Chatbot</div>
@@ -139,7 +171,6 @@
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SmartPDF-Analyzer---/')">SmartPDF Analyzer</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-summarizer/')">AI Summarizer</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/AI-Text-Encryption-Decryption-Tool/')">AI Text Encryption & Decryption Tool</div>
-      <!-- New Tool Added -->
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/AI-future-predictor---/')">AI Future Predictor</div>
     </div>
   </div>
@@ -155,7 +186,7 @@
 
       tools.forEach(tool => {
         const title = tool.textContent.toLowerCase();
-        tool.style.display = title.includes(input) ? 'block' : 'block';
+        tool.style.display = title.includes(input) ? 'block' : 'none';
       });
     }
 
