@@ -113,7 +113,7 @@
       to {opacity: 1;}
     }
 
-    .top-banner {
+    .top-banner, .community-links {
       text-align: center;
       margin-bottom: 20px;
       padding: 15px;
@@ -121,44 +121,54 @@
       border-radius: 10px;
     }
 
-    .top-banner p {
+    .top-banner p,
+    .community-links p {
       margin: 5px 0;
     }
 
-    .top-banner a {
+    .top-banner a,
+    .community-links a {
       color: #00c6ff;
       text-decoration: none;
     }
 
-    .top-banner a:hover {
+    .top-banner a:hover,
+    .community-links a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- 🔗 Community Links Section -->
+    <div class="community-links">
+      <p><strong>Join WhatsApp Community:</strong> <a href="https://chat.whatsapp.com/H9lg9OTMFwaLybT4UvWP9z" target="_blank">Click Here</a></p>
+      <p><strong>Join Telegram Channel:</strong> <a href="https://t.me/shopnotamal" target="_blank">Click Here</a></p>
+      <p><strong>Accessible Resource on YouTube:</strong> <a href="https://youtube.com/@accessibleresource?si=ZSfYANNI4yFSONe1" target="_blank">Click Here</a></p>
+    </div>
+
+    <!-- 🧠 Branding Banner -->
     <div class="top-banner">
       <p><strong>Realizing Dreams Through the Touch of Technology</strong></p>
-      <p>📺 YouTube: <a href="https://youtube.com/@accessibleresource?si=LGhrnQDGHw-BTroD" target="_blank">Accessible Resource</a></p>
-      <p>💬 Telegram: <a href="https://t.me/shopnotamal" target="_blank">Join Us</a></p>
     </div>
 
     <h1>Tool Fusion AI</h1>
 
-    <div class="welcome" id="welcomeMessage">
-      <!-- Time-based greeting will be inserted here by JS -->
-    </div>
+    <div class="welcome" id="welcomeMessage"></div>
 
     <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
 
     <input type="text" id="search" placeholder="Search tools..." onkeyup="searchTools()"/>
 
     <div class="tool-list" id="toolList">
-      <!-- Newly Added Tools First -->
+      <!-- 🆕 New Tools on Top -->
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Application/')">Honey GPT</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Fb-companion/')">Shopno Tamal FB Companion</div>
+      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SMRipon-YT-Companion/')">SMRipon YT Companion</div>
+
+      <!-- Previously Added Tools -->
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/photo-analyser.-/')">Photo Analyser</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Text-to-image-generator/')">Text to Image Generator</div>
-
-      <!-- Existing Tools -->
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Heart-wish/')">HeartWish Premium</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/VocabHub/')">VocabHub</div>
       <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Accessible-resource-chat/')">Accessible Resource AI Chatbot</div>
