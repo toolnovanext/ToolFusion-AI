@@ -5,107 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tool Fusion AI</title>
   <style>
+    body.light-mode {
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #ffffff;
+    }
+
     body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      transition: background-color 0.5s, color 0.5s;
-      background-color: #121212;
-      color: #f0f0f0;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.8em;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .welcome {
-      background: #1e1e1e;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 183, 255, 0.3);
-      margin-bottom: 30px;
-      animation: fadeIn 2s ease;
-    }
-
-    .toggle-btn {
-      background: #333;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      cursor: pointer;
-      border-radius: 30px;
-      margin-bottom: 20px;
       transition: all 0.3s ease;
-    }
-
-    .toggle-btn:hover {
-      background: #0072ff;
-    }
-
-    #search {
-      width: 100%;
-      padding: 12px;
-      font-size: 1em;
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 25px;
-      outline: none;
-      background: #1e1e1e;
-      color: white;
-    }
-
-    .tool-list {
-      max-height: 400px;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-
-    .tool-item {
-      padding: 15px;
-      margin-bottom: 10px;
-      background: #222;
-      border-radius: 12px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .tool-item:hover {
-      background: #2a2a2a;
-      transform: scale(1.02);
-    }
-
-    .light-mode {
-      background-color: #f3f3f3;
-      color: #222;
-    }
-
-    .light-mode .welcome {
-      background: #fff;
-      color: #222;
-    }
-
-    .light-mode #search {
-      background: #e0e0e0;
-      color: #000;
-    }
-
-    .light-mode .tool-item {
-      background: #ffffff;
-      color: #000;
-    }
-
-    .light-mode .tool-item:hover {
-      background: #dcdcdc;
+      animation: fadeIn 1s ease-in;
     }
 
     @keyframes fadeIn {
@@ -113,119 +28,228 @@
       to {opacity: 1;}
     }
 
-    .top-banner, .community-links {
-      text-align: center;
+    .header, .tool, .slogan {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
       margin-bottom: 20px;
-      padding: 15px;
-      background: #1d1d1d;
-      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
     }
 
-    .top-banner p,
-    .community-links p {
-      margin: 5px 0;
+    .slogan {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #00ffe1;
+      text-shadow: 0 0 10px #00ffe1;
     }
 
-    .top-banner a,
-    .community-links a {
-      color: #00c6ff;
-      text-decoration: none;
+    .tool h3 {
+      margin: 0 0 5px;
+      color: #ffcc70;
     }
 
-    .top-banner a:hover,
-    .community-links a:hover {
-      text-decoration: underline;
+    .tool button {
+      margin-top: 5px;
+      padding: 10px 20px;
+      border: none;
+      background: #00c9ff;
+      color: #000;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00c9ff, 0 0 20px #92fe9d;
+      transition: transform 0.2s;
+    }
+
+    .tool button:hover {
+      transform: scale(1.05);
+      background: #92fe9d;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .top-buttons button {
+      background: #ff6a00;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff6a00;
+    }
+
+    .top-buttons button:hover {
+      background: #ffa41b;
+    }
+
+    .toggle-mode button {
+      background: #6c757d;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .toggle-mode button:hover {
+      background: #5a6268;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <!-- 🔗 Community Links Section -->
-    <div class="community-links">
-      <p><strong>Join WhatsApp Community:</strong> <a href="https://chat.whatsapp.com/H9lg9OTMFwaLybT4UvWP9z" target="_blank">Click Here</a></p>
-      <p><strong>Join Telegram Channel:</strong> <a href="https://t.me/shopnotamal" target="_blank">Click Here</a></p>
-      <p><strong>Accessible Resource on YouTube:</strong> <a href="https://youtube.com/@accessibleresource?si=ZSfYANNI4yFSONe1" target="_blank">Click Here</a></p>
-    </div>
+<body class="dark-mode">
 
-    <!-- 🧠 Branding Banner -->
-    <div class="top-banner">
-      <p><strong>Realizing Dreams Through the Touch of Technology</strong></p>
-    </div>
+  <div class="slogan">Realizing Dreams Through the Touch of Technology</div>
 
-    <h1>Tool Fusion AI</h1>
-
-    <div class="welcome" id="welcomeMessage"></div>
-
-    <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
-
-    <input type="text" id="search" placeholder="Search tools..." onkeyup="searchTools()"/>
-
-    <div class="tool-list" id="toolList">
-      <!-- 🆕 New Tools on Top -->
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Application/')">Honey GPT</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Fb-companion/')">Shopno Tamal FB Companion</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SMRipon-YT-Companion/')">SMRipon YT Companion</div>
-
-      <!-- Previously Added Tools -->
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/photo-analyser.-/')">Photo Analyser</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Text-to-image-generator/')">Text to Image Generator</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Heart-wish/')">HeartWish Premium</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/VocabHub/')">VocabHub</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Accessible-resource-chat/')">Accessible Resource AI Chatbot</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/LinguaFlow-Translate/')">LinguaFlow Translate</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/RiddleMaster-Elite/')">RiddleMaster Elite</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Smart-Post-Studio/')">Smart Post Studio</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Eternal-Love-Weaver-/')">Eternal Love Weaver</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Grammar-checker/')">Smart AI Grammar Checker</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-poem-writer/')">Smart AI Poem Writer</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/SmartPDF-Analyzer---/')">SmartPDF Analyzer</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/Ai-summarizer/')">AI Summarizer</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/AI-Text-Encryption-Decryption-Tool/')">AI Text Encryption & Decryption Tool</div>
-      <div class="tool-item" onclick="openTool('https://accessibleresource.github.io/AI-future-predictor---/')">AI Future Predictor</div>
-    </div>
+  <div class="header" id="welcome">
+    Welcome to Tool Fusion AI — your smart gateway to intelligent, accessible tools that evolve and grow regularly to meet your needs.
   </div>
 
+  <div class="top-buttons">
+    <button onclick="window.open('https://youtube.com/@accessibleresource?si=LGhrnQDGHw-BTroD')">Join on YouTube</button>
+    <button onclick="window.open('https://t.me/shopnotamal')">Join on Telegram</button>
+  </div>
+
+  <div class="toggle-mode">
+    <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
+  </div>
+
+  <div class="header" id="deviceInfo"></div>
+
+  <div id="tools"></div>
+
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    function searchTools() {
-      const input = document.getElementById('search').value.toLowerCase();
-      const tools = document.querySelectorAll('.tool-item');
-
-      tools.forEach(tool => {
-        const title = tool.textContent.toLowerCase();
-        tool.style.display = title.includes(input) ? 'block' : 'none';
-      });
-    }
-
-    function openTool(url) {
-      window.open(url, '_blank');
-    }
-
-    function setWelcomeMessage() {
-      const hour = new Date().getHours();
-      let greeting = '';
-
-      if (hour >= 5 && hour < 12) {
-        greeting = 'Good Morning!';
-      } else if (hour >= 12 && hour < 17) {
-        greeting = 'Good Afternoon!';
-      } else {
-        greeting = 'Good Evening!';
+    const tools = [
+      {
+        title: "AI Text to Speech",
+        desc: "Convert text to natural-sounding speech using advanced AI.",
+        link: "https://accessibleresource.github.io/text-to-speech-ai/"
+      },
+      {
+        title: "AI Summarizer",
+        desc: "Summarize video, audio, image, or documents.",
+        link: "https://accessibleresource.github.io/Ai-summarizer/"
+      },
+      {
+        title: "LinguaFlow Translate",
+        desc: "Your premium AI-powered translation experience.",
+        link: "https://accessibleresource.github.io/LinguaFlow-Translate/"
+      },
+      {
+        title: "Photo Analyser",
+        desc: "Analyse your photo with AI.",
+        link: "https://accessibleresource.github.io/photo-analyser.-/"
+      },
+      {
+        title: "Text to Image Generator",
+        desc: "Generate images from text using AI.",
+        link: "https://accessibleresource.github.io/Text-to-image-generator/"
+      },
+      {
+        title: "SMRipon YT Companion",
+        desc: "Manage and analyze your YouTube channel effectively.",
+        link: "https://accessibleresource.github.io/SMRipon-YT-Companion/"
+      },
+      {
+        title: "FB Companion",
+        desc: "Powerful Facebook content assistant and companion tool.",
+        link: "https://accessibleresource.github.io/Fb-companion/"
+      },
+      {
+        title: "SmartPDF Analyzer",
+        desc: "Analyze PDF files intelligently.",
+        link: "https://accessibleresource.github.io/Smart-PDF-Analyzer/"
+      },
+      {
+        title: "AI Chatbot",
+        desc: "Talk with Accessible Resource chatbot.",
+        link: "https://accessibleresource.github.io/Accessible-resource-chat/"
+      },
+      {
+        title: "Smart Post Studio",
+        desc: "Generate social posts and articles easily.",
+        link: "https://accessibleresource.github.io/Smart-Post-Studio/"
+      },
+      {
+        title: "VocabHub",
+        desc: "Multi-language dictionary app.",
+        link: "https://accessibleresource.github.io/VocabHub/"
+      },
+      {
+        title: "AI Grammar Checker",
+        desc: "Fix grammar issues with AI suggestions.",
+        link: "https://accessibleresource.github.io/Grammar-checker/"
+      },
+      {
+        title: "Text Analyzer Pro",
+        desc: "Analyze word, sentence, and punctuation stats.",
+        link: "https://accessibleresource.github.io/Text-analyser-pro/"
+      },
+      {
+        title: "Text Encryptor",
+        desc: "Encrypt or decrypt text using AI.",
+        link: "https://accessibleresource.github.io/AI-Text-Encryption-Decryption-Tool/"
+      },
+      {
+        title: "AI-future-predictor",
+        desc: "Predict your future with AI insights.",
+        link: "https://accessibleresource.github.io/AI-future-predictor---/"
+      },
+      {
+        title: "Simple Calculator",
+        desc: "Basic calculator tool.",
+        link: "https://accessibleresource.github.io/Simple-calculator/"
+      },
+      {
+        title: "Age Calculator",
+        desc: "Calculate your age instantly.",
+        link: "https://accessibleresource.github.io/Age-Calculator-/"
+      },
+      {
+        title: "Currency Converter",
+        desc: "Convert between currencies.",
+        link: "https://accessibleresource.github.io/Currency-converter/"
+      },
+      {
+        title: "Global Time Converter",
+        desc: "Check time in different time zones.",
+        link: "https://accessibleresource.github.io/Time-converter/"
+      },
+      {
+        title: "Honey GPT",
+        desc: "Speak and receive real-time answers in a natural female voice.",
+        link: "https://accessibleresource.github.io/Application/"
       }
+    ];
 
-      const message = `
-        <p><strong>${greeting}</strong></p>
-        <p>Welcome to <strong>Tool Fusion AI</strong>, your all-in-one destination created by Accessible Resource. This platform brings together smart and helpful AI tools designed to boost your productivity, creativity, and daily tasks.</p>
-        <p>Browse the tools below or search to find exactly what you need. Your digital assistant is here, always ready to help!</p>
-      `;
-
-      document.getElementById('welcomeMessage').innerHTML = message;
+    const deviceInfo = document.getElementById("deviceInfo");
+    const now = new Date();
+    if (navigator.getBattery) {
+      navigator.getBattery().then(battery => {
+        deviceInfo.innerText = `Battery: ${Math.round(battery.level * 100)}% | Date: ${now.toLocaleDateString()} | Time: ${now.toLocaleTimeString()}`;
+      });
+    } else {
+      deviceInfo.innerText = `Date: ${now.toLocaleDateString()} | Time: ${now.toLocaleTimeString()}`;
     }
 
-    setWelcomeMessage();
+    const toolSection = document.getElementById("tools");
+    tools.forEach(tool => {
+      const div = document.createElement("div");
+      div.className = "tool";
+      div.innerHTML = `<h3>${tool.title}</h3><p>${tool.desc}</p><button onclick="window.open('${tool.link}')">Open</button>`;
+      toolSection.appendChild(div);
+    });
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+      document.body.classList.toggle("dark-mode");
+    }
   </script>
 </body>
 </html>
