@@ -101,6 +101,29 @@
     .toggle-mode button:hover {
       background: #5a6268;
     }
+
+    /* Styles for new search box */
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #555;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    body.light-mode #searchInput {
+        background-color: #fff;
+        color: #000;
+        border-color: #ccc;
+    }
+
   </style>
 </head>
 <body class="dark-mode">
@@ -122,10 +145,23 @@
 
   <div class="header" id="deviceInfo"></div>
 
+  <!-- New Search Box -->
+  <div class="search-container">
+    <input type="text" id="searchInput" onkeyup="filterTools()" placeholder="Search for tools by name..." title="Type in a name">
+  </div>
+
+
   <div id="tools"></div>
 
   <script>
     const tools = [
+      // New Tool added at the top
+      {
+        title: "Audio and Video Transcriber",
+        desc: "A tool to transcribe audio and video files with high accuracy.",
+        link: "https://accessibleresource.github.io/audio-video-transcribed/"
+      },
+      // Previous tools start here
       {
         title: "AI Text to Speech",
         desc: "Convert text to natural-sounding speech using advanced AI.",
@@ -239,17 +275,34 @@
     }
 
     const toolSection = document.getElementById("tools");
-    tools.forEach(tool => {
-      const div = document.createElement("div");
-      div.className = "tool";
-      div.innerHTML = `<h3>${tool.title}</h3><p>${tool.desc}</p><button onclick="window.open('${tool.link}')">Open</button>`;
-      toolSection.appendChild(div);
-    });
+
+    function renderTools(toolsToDisplay) {
+        toolSection.innerHTML = ""; // Clear the list before rendering
+        toolsToDisplay.forEach(tool => {
+            const div = document.createElement("div");
+            div.className = "tool";
+            div.innerHTML = `<h3>${tool.title}</h3><p>${tool.desc}</p><button onclick="window.open('${tool.link}')">Open</button>`;
+            toolSection.appendChild(div);
+        });
+    }
+    
+    // New function to filter tools based on search input
+    function filterTools() {
+        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const filteredTools = tools.filter(tool => 
+            tool.title.toLowerCase().includes(searchInput)
+        );
+        renderTools(filteredTools);
+    }
 
     function toggleMode() {
       document.body.classList.toggle("light-mode");
       document.body.classList.toggle("dark-mode");
     }
+
+    // Initial render of all tools when the page loads
+    renderTools(tools);
+
   </script>
 </body>
 </html>
