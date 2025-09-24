@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tool Fusion AI</title>
+  <title>Tool fusion AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://toolnovanext.github.io/scripts/navigation.js" defer></script>
+  <script src="https://toolnovanext.github.io/scripts/notification.js" defer></script>
   <style>
     :root {
       --border-radius: 16px;
       --transition-speed: 0.3s;
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --text-color: #e0e0e0;
+      --background-dark: #121212;
     }
 
-    /* Base Styles & Dark Mode Default */
+    /* Base Styles */
     body {
       font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 24px;
-      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+      background: var(--background-dark);
+      color: var(--text-color);
       animation: fadeIn 1s ease-in;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -27,17 +34,6 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
-    }
-
-    body.dark-mode {
-      background: #121212 linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-      color: #e0e0e0;
-    }
-
-    /* Light Mode */
-    body.light-mode {
-      background: #f4f7fc;
-      color: #2c3e50;
     }
 
     /* Glassmorphism Container Style */
@@ -53,125 +49,30 @@
       transition: all var(--transition-speed) ease;
     }
 
-    body.light-mode .glass-container {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
-    }
-    
     /* Header & Slogan */
     .slogan {
       text-align: center;
       font-size: 28px;
       font-weight: 700;
-      color: #00ffe1;
-      text-shadow: 0 0 12px rgba(0, 255, 225, 0.7);
-    }
-    
-    body.light-mode .slogan {
-        color: #1a73e8;
-        text-shadow: none;
-    }
-
-    .header {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-    
-    /* Top Buttons & Controls */
-    .controls-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-
-    .top-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .top-buttons button, .toggle-mode button {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
-    }
-    
-    .top-buttons button:hover, .toggle-mode button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .top-buttons button {
-      background: #ff6a00;
-      color: #fff;
-    }
-
-    .top-buttons button:hover {
-      background: #ffa41b;
-    }
-
-    .toggle-mode button {
-      background: #6c757d;
-      color: #fff;
-    }
-
-    body.light-mode .toggle-mode button {
-        background: #e9ecef;
-        color: #343a40;
-    }
-
-    /* Search Box */
-    .search-container {
+      color: var(--primary-color);
       margin-bottom: 24px;
     }
 
-    #searchInput {
-      width: 100%;
-      padding: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      box-sizing: border-box;
-      font-size: 16px;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      transition: all var(--transition-speed) ease;
-    }
-    
-    #searchInput:focus {
-        outline: none;
-        border-color: #00c9ff;
-        box-shadow: 0 0 15px rgba(0, 201, 255, 0.5);
+    .header {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 24px;
     }
 
-    body.light-mode #searchInput {
-        background-color: #ffffff;
-        color: #2c3e50;
-        border-color: #ced4da;
-    }
-    
-    body.light-mode #searchInput:focus {
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    }
-    
     /* Tools Grid */
     #tools {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
     }
 
-    /* Base Tool Card Style */
+    /* Tool Card Style */
     .tool {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
       padding: 24px;
@@ -185,356 +86,193 @@
       justify-content: space-between;
       transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     }
-    
-    body.light-mode .tool {
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
 
     .tool:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-    }
-    
-    body.light-mode .tool:hover {
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     }
 
     .tool h3 {
       margin: 0 0 10px;
       font-size: 1.5rem;
       font-weight: 600;
-    }
-    
-    .tool p {
-        flex-grow: 1;
-        margin: 0 0 20px;
-        line-height: 1.6;
-        color: #c0c0c0;
+      color: var(--primary-color);
     }
 
-    body.light-mode .tool p {
-        color: #5a6268;
+    .tool p {
+      flex-grow: 1;
+      margin: 0 0 20px;
+      line-height: 1.6;
+      color: var(--text-color);
     }
 
     .tool button {
       padding: 12px 24px;
       border: none;
-      color: #fff;
       border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
       font-family: 'Poppins', sans-serif;
+      background: var(--primary-color);
+      color: #fff;
       transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
       align-self: flex-start;
     }
 
     .tool button:hover {
+      background: var(--primary-hover);
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     }
-
-    /* --- Unique Tool Themes --- */
-
-    /* 1. PolyLume */
-    #tools .tool:nth-child(1) { border-top: 4px solid #3a7bd5; }
-    #tools .tool:nth-child(1) h3 { color: #3a7bd5; }
-    #tools .tool:nth-child(1) button { background: linear-gradient(45deg, #3a7bd5, #3a6073); }
-
-    /* 2. Audio and Video Transcriber */
-    #tools .tool:nth-child(2) { border-top: 4px solid #ff8008; }
-    #tools .tool:nth-child(2) h3 { color: #ff8008; }
-    #tools .tool:nth-child(2) button { background: linear-gradient(45deg, #ff8008, #ffc837); }
-    
-    /* 3. AI Text to Speech */
-    #tools .tool:nth-child(3) { border-top: 4px solid #00c9ff; }
-    #tools .tool:nth-child(3) h3 { color: #00c9ff; }
-    #tools .tool:nth-child(3) button { background: linear-gradient(45deg, #00c9ff, #92fe9d); }
-    
-    /* 4. AI Summarizer */
-    #tools .tool:nth-child(4) { border-top: 4px solid #ee0979; }
-    #tools .tool:nth-child(4) h3 { color: #ee0979; }
-    #tools .tool:nth-child(4) button { background: linear-gradient(45deg, #ee0979, #ff6a00); }
-    
-    /* 5. LinguaFlow Translate */
-    #tools .tool:nth-child(5) { border-top: 4px solid #1dd1a1; }
-    #tools .tool:nth-child(5) h3 { color: #1dd1a1; }
-    #tools .tool:nth-child(5) button { background: linear-gradient(45deg, #1dd1a1, #10ac84); }
-    
-    /* 6. Photo Analyser */
-    #tools .tool:nth-child(6) { border-top: 4px solid #feca57; }
-    #tools .tool:nth-child(6) h3 { color: #feca57; }
-    #tools .tool:nth-child(6) button { background: linear-gradient(45deg, #feca57, #ff9f43); }
-    
-    /* 7. Text to Image Generator */
-    #tools .tool:nth-child(7) { border-top: 4px solid #5f27cd; }
-    #tools .tool:nth-child(7) h3 { color: #5f27cd; }
-    #tools .tool:nth-child(7) button { background: linear-gradient(45deg, #5f27cd, #341f97); }
-    
-    /* 8. SMRipon YT Companion */
-    #tools .tool:nth-child(8) { border-top: 4px solid #ff4d4d; }
-    #tools .tool:nth-child(8) h3 { color: #ff4d4d; }
-    #tools .tool:nth-child(8) button { background: linear-gradient(45deg, #ff4d4d, #c44569); }
-    
-    /* 9. FB Companion */
-    #tools .tool:nth-child(9) { border-top: 4px solid #1877f2; }
-    #tools .tool:nth-child(9) h3 { color: #1877f2; }
-    #tools .tool:nth-child(9) button { background: linear-gradient(45deg, #1877f2, #3b5998); }
-    
-    /* 10. SmartPDF Analyzer */
-    #tools .tool:nth-child(10) { border-top: 4px solid #d63031; }
-    #tools .tool:nth-child(10) h3 { color: #d63031; }
-    #tools .tool:nth-child(10) button { background: linear-gradient(45deg, #d63031, #b71540); }
-    
-    /* 11. AI Chatbot */
-    #tools .tool:nth-child(11) { border-top: 4px solid #00d2d3; }
-    #tools .tool:nth-child(11) h3 { color: #00d2d3; }
-    #tools .tool:nth-child(11) button { background: linear-gradient(45deg, #00d2d3, #34e7e4); }
-
-    /* 12. Smart Post Studio */
-    #tools .tool:nth-child(12) { border-top: 4px solid #6c5ce7; }
-    #tools .tool:nth-child(12) h3 { color: #6c5ce7; }
-    #tools .tool:nth-child(12) button { background: linear-gradient(45deg, #6c5ce7, #a29bfe); }
-
-    /* 13. VocabHub */
-    #tools .tool:nth-child(13) { border-top: 4px solid #fd79a8; }
-    #tools .tool:nth-child(13) h3 { color: #fd79a8; }
-    #tools .tool:nth-child(13) button { background: linear-gradient(45deg, #fd79a8, #e84393); }
-
-    /* 14. AI Grammar Checker */
-    #tools .tool:nth-child(14) { border-top: 4px solid #00b894; }
-    #tools .tool:nth-child(14) h3 { color: #00b894; }
-    #tools .tool:nth-child(14) button { background: linear-gradient(45deg, #00b894, #55efc4); }
-
-    /* 15. Text Analyzer Pro */
-    #tools .tool:nth-child(15) { border-top: 4px solid #2d3436; }
-    #tools .tool:nth-child(15) h3 { color: #2d3436; }
-    #tools .tool:nth-child(15) button { background: linear-gradient(45deg, #2d3436, #636e72); }
-    body.light-mode #tools .tool:nth-child(15) h3 { color: #2d3436; }
-
-    /* 16. Text Encryptor */
-    #tools .tool:nth-child(16) { border-top: 4px solid #a29bfe; }
-    #tools .tool:nth-child(16) h3 { color: #a29bfe; }
-    #tools .tool:nth-child(16) button { background: linear-gradient(45deg, #a29bfe, #74b9ff); }
-
-    /* 17. AI-future-predictor */
-    #tools .tool:nth-child(17) { border-top: 4px solid #ff7675; }
-    #tools .tool:nth-child(17) h3 { color: #ff7675; }
-    #tools .tool:nth-child(17) button { background: linear-gradient(45deg, #ff7675, #d63031); }
-    
-    /* 18. Simple Calculator */
-    #tools .tool:nth-child(18) { border-top: 4px solid #81ecec; }
-    #tools .tool:nth-child(18) h3 { color: #81ecec; }
-    #tools .tool:nth-child(18) button { background: linear-gradient(45deg, #81ecec, #74b9ff); }
-    
-    /* 19. Age Calculator */
-    #tools .tool:nth-child(19) { border-top: 4px solid #fab1a0; }
-    #tools .tool:nth-child(19) h3 { color: #fab1a0; }
-    #tools .tool:nth-child(19) button { background: linear-gradient(45deg, #fab1a0, #ff7675); }
-    
-    /* 20. Currency Converter */
-    #tools .tool:nth-child(20) { border-top: 4px solid #55efc4; }
-    #tools .tool:nth-child(20) h3 { color: #55efc4; }
-    #tools .tool:nth-child(20) button { background: linear-gradient(45deg, #55efc4, #00b894); }
-
-    /* 21. Global Time Converter */
-    #tools .tool:nth-child(21) { border-top: 4px solid #74b9ff; }
-    #tools .tool:nth-child(21) h3 { color: #74b9ff; }
-    #tools .tool:nth-child(21) button { background: linear-gradient(45deg, #74b9ff, #0984e3); }
-
-    /* 22. Honey GPT */
-    #tools .tool:nth-child(22) { border-top: 4px solid #fdcb6e; }
-    #tools .tool:nth-child(22) h3 { color: #fdcb6e; }
-    #tools .tool:nth-child(22) button { background: linear-gradient(45deg, #fdcb6e, #e17055); }
-
   </style>
 </head>
-<body class="dark-mode">
+<body>
 
-  <div class="slogan glass-container">Realizing Dreams Through the Touch of Technology</div>
-
-  <div class="header glass-container" id="welcome">
-    Welcome to Tool Fusion AI — your smart gateway to intelligent, accessible tools that evolve and grow regularly to meet your needs.
-  </div>
-
-  <div class="controls-container">
-    <div class="top-buttons">
-      <button onclick="window.open('https://youtube.com/@accessibleresource?si=LGhrnQDGHw-BTroD')">Join on YouTube</button>
-      <button onclick="window.open('https://t.me/shopnotamal')">Join on Telegram</button>
+  <header>
+  </header>
+  <div id="main">
+    <div class="glass-container">
+      <h1 class="slogan">ToolNovaNext AI</h1>
+      <p class="header">Discover a suite of powerful AI-driven tools designed to enhance productivity and creativity.</p>
     </div>
 
-    <div class="toggle-mode">
-      <button onclick="toggleMode()">Toggle Mode</button>
-    </div>
+    <div id="tools"></div>
   </div>
-
-  <div class="header glass-container" id="deviceInfo"></div>
-
-  <div class="search-container">
-    <input type="text" id="searchInput" onkeyup="filterTools()" placeholder="Search for tools by name..." title="Type in a name">
-  </div>
-
-  <div id="tools"></div>
-
+  <footer>
+  </footer>
   <script>
     const tools = [
       {
-        title: "AI website summarizer summarizer",
-        desc: "summarise or extract key points from which sites or urls. your AI premium solution for online multi documents, articles, pages, sites, images etc summarization and extraction. ask ai about multiple websites and urls at one time.",
-        link: "https://accessibleresource.github.io/website-summarizer/"
+        title: "AI Website Summarizer",
+        desc: "Summarize or extract key points from websites or URLs. Your AI-powered solution for multi-document, article, page, site, and image summarization.",
+        link: "https://toolnovanext.github.io/website-summarizer/"
       },
       {
         title: "PolyLume",
         desc: "A versatile tool for multifaceted creative and productive tasks.",
-        link: "https://accessibleresource.github.io/PolyLume/"
+        link: "https://toolnovanext.github.io/PolyLume/"
       },
-      // Previous tools start here
       {
         title: "Audio and Video Transcriber",
         desc: "A tool to transcribe audio and video files with high accuracy.",
-        link: "https://accessibleresource.github.io/audio-video-transcribed/"
+        link: "https://toolnovanext.github.io/audio-video-transcribed/"
       },
       {
         title: "AI Text to Speech",
         desc: "Convert text to natural-sounding speech using advanced AI.",
-        link: "https://accessibleresource.github.io/text-to-speech-ai/"
+        link: "https://toolnovanext.github.io/text-to-speech-ai/"
       },
       {
         title: "AI Summarizer",
         desc: "Summarize video, audio, image, or documents.",
-        link: "https://accessibleresource.github.io/Ai-summarizer/"
+        link: "https://toolnovanext.github.io/Ai-summarizer/"
       },
       {
         title: "LinguaFlow Translate",
         desc: "Your premium AI-powered translation experience.",
-        link: "https://accessibleresource.github.io/LinguaFlow-Translate/"
+        link: "https://toolnovanext.github.io/LinguaFlow-Translate/"
       },
       {
         title: "Photo Analyser",
         desc: "Analyse your photo with AI.",
-        link: "https://accessibleresource.github.io/photo-analyser.-/"
+        link: "https://toolnovanext.github.io/photo-analyser.-/"
       },
       {
         title: "Text to Image Generator",
         desc: "Generate images from text using AI.",
-        link: "https://accessibleresource.github.io/Text-to-image-generator/"
+        link: "https://toolnovanext.github.io/Text-to-image-generator/"
       },
       {
         title: "SMRipon YT Companion",
         desc: "Manage and analyze your YouTube channel effectively.",
-        link: "https://accessibleresource.github.io/SMRipon-YT-Companion/"
+        link: "https://toolnovanext.github.io/SMRipon-YT-Companion/"
       },
       {
         title: "FB Companion",
         desc: "Powerful Facebook content assistant and companion tool.",
-        link: "https://accessibleresource.github.io/Fb-companion/"
+        link: "https://toolnovanext.github.io/Fb-companion/"
       },
       {
         title: "SmartPDF Analyzer",
         desc: "Analyze PDF files intelligently.",
-        link: "https://accessibleresource.github.io/Smart-PDF-Analyzer/"
+        link: "https://toolnovanext.github.io/Smart-PDF-Analyzer/"
       },
       {
         title: "AI Chatbot",
-        desc: "Talk with Accessible Resource chatbot.",
-        link: "https://accessibleresource.github.io/Accessible-resource-chat/"
+        desc: "Talk with ToolNovaNext chatbot.",
+        link: "https://toolnovanext.github.io/Accessible-resource-chat/"
       },
       {
         title: "Smart Post Studio",
         desc: "Generate social posts and articles easily.",
-        link: "https://accessibleresource.github.io/Smart-Post-Studio/"
+        link: "https://toolnovanext.github.io/Smart-Post-Studio/"
       },
       {
         title: "VocabHub",
         desc: "Multi-language dictionary app.",
-        link: "https://accessibleresource.github.io/VocabHub/"
+        link: "https://toolnovanext.github.io/VocabHub/"
       },
       {
         title: "AI Grammar Checker",
         desc: "Fix grammar issues with AI suggestions.",
-        link: "https://accessibleresource.github.io/Grammar-checker/"
+        link: "https://toolnovanext.github.io/Grammar-checker/"
       },
       {
         title: "Text Analyzer Pro",
         desc: "Analyze word, sentence, and punctuation stats.",
-        link: "https://accessibleresource.github.io/Text-analyser-pro/"
+        link: "https://toolnovanext.github.io/Text-analyser-pro/"
       },
       {
         title: "Text Encryptor",
         desc: "Encrypt or decrypt text using AI.",
-        link: "https://accessibleresource.github.io/AI-Text-Encryption-Decryption-Tool/"
+        link: "https://toolnovanext.github.io/AI-Text-Encryption-Decryption-Tool/"
       },
       {
-        title: "AI-future-predictor",
+        title: "AI Future Predictor",
         desc: "Predict your future with AI insights.",
-        link: "https://accessibleresource.github.io/AI-future-predictor---/"
+        link: "https://toolnovanext.github.io/AI-future-predictor---/"
       },
       {
         title: "Simple Calculator",
         desc: "Basic calculator tool.",
-        link: "https://accessibleresource.github.io/Simple-calculator/"
+        link: "https://toolnovanext.github.io/Simple-calculator/"
       },
       {
         title: "Age Calculator",
         desc: "Calculate your age instantly.",
-        link: "https://accessibleresource.github.io/Age-Calculator-/"
+        link: "https://toolnovanext.github.io/Age-Calculator-/"
       },
       {
         title: "Currency Converter",
         desc: "Convert between currencies.",
-        link: "https://accessibleresource.github.io/Currency-converter/"
+        link: "https://toolnovanext.github.io/Currency-converter/"
       },
       {
         title: "Global Time Converter",
         desc: "Check time in different time zones.",
-        link: "https://accessibleresource.github.io/Time-converter/"
+        link: "https://toolnovanext.github.io/Time-converter/"
       },
       {
         title: "Honey GPT",
         desc: "Speak and receive real-time answers in a natural female voice.",
-        link: "https://accessibleresource.github.io/Application/"
+        link: "https://toolnovanext.github.io/Application/"
       }
     ];
-
-    const deviceInfo = document.getElementById("deviceInfo");
-    const now = new Date();
-    if (navigator.getBattery) {
-      navigator.getBattery().then(battery => {
-        deviceInfo.innerText = `Battery: ${Math.round(battery.level * 100)}% | Date: ${now.toLocaleDateString()} | Time: ${now.toLocaleTimeString()}`;
-      });
-    } else {
-      deviceInfo.innerText = `Date: ${now.toLocaleDateString()} | Time: ${now.toLocaleTimeString()}`;
-    }
 
     const toolSection = document.getElementById("tools");
 
     function renderTools(toolsToDisplay) {
-        toolSection.innerHTML = ""; // Clear the list before rendering
-        toolsToDisplay.forEach(tool => {
-            const div = document.createElement("div");
-            div.className = "tool";
-            div.innerHTML = `<h3>${tool.title}</h3><p>${tool.desc}</p><button onclick="window.open('${tool.link}', '_blank')">Open</button>`;
-            toolSection.appendChild(div);
-        });
-    }
-    
-    function filterTools() {
-        const searchInput = document.getElementById("searchInput").value.toLowerCase();
-        const filteredTools = tools.filter(tool => 
-            tool.title.toLowerCase().includes(searchInput)
-        );
-        renderTools(filteredTools);
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-      document.body.classList.toggle("dark-mode");
+      toolSection.innerHTML = ""; // Clear the list before rendering
+      toolsToDisplay.forEach(tool => {
+        const div = document.createElement("div");
+        div.className = "tool";
+        div.innerHTML = `<h3>${tool.title}</h3><p>${tool.desc}</p><button onclick="window.open('${tool.link}', '_blank')">Open</button>`;
+        toolSection.appendChild(div);
+      });
     }
 
     // Initial render of all tools when the page loads
     renderTools(tools);
-
   </script>
 </body>
 </html>
